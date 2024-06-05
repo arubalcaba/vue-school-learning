@@ -1,6 +1,19 @@
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const drawer = ref(false)
+</script>
 <template>
   <v-layout class="rounded rounded-md">
-    <v-app-bar title="Application bar">
+    <v-app-bar>
+      <template #prepend>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-title>
+        <router-link to="/">
+         My Awesome App
+      </router-link>
+      </v-toolbar-title>
+      </template>
       <template #append>
         <v-menu>
           <template v-slot:activator="{ props }">
@@ -19,10 +32,12 @@
       </template>
     </v-app-bar>
 
-    <v-navigation-drawer>
-      <v-list>
-        <v-list-item title="Navigation drawer"></v-list-item>
-      </v-list>
+    <v-navigation-drawer expand-on-hover
+        rail v-model="drawer">
+      <v-list density="compact" nav>
+          <v-list-item prepend-icon="mdi-note-outline" title="Posts" :to="`/posts`"></v-list-item>
+          <v-list-item prepend-icon="mdi-comment-text-outline" title="Comments" :to="`/comments`"></v-list-item>
+        </v-list>
     </v-navigation-drawer>
 
     <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
@@ -31,6 +46,4 @@
   </v-layout>
 </template>
 
-<script lang="ts" setup>
-  //
-</script>
+
