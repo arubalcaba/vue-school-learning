@@ -28,7 +28,7 @@ const postForm = ref();
                     <template v-slot:default="{ isActive }">
                         <v-card :title="item.title">
                             <v-card-text>
-                                <PostForm ref="postForm" :post="item"/>
+                                <PostForm ref="postForm" :post="item" @submit="isActive.value = false"/>
                             </v-card-text>
 
                             <v-card-actions>
@@ -39,8 +39,7 @@ const postForm = ref();
                                 variant="flat"
                                 text="Save Post"
                                 @click="
-                                postForm.submit();
-                                isActive.value = false"></v-btn>
+                                postForm.submit()"></v-btn>
                             </v-card-actions>
                         </v-card>
                     </template>
