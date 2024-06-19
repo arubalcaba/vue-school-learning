@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import PostForm from './PostForm.vue';
 const posts = ref([
     { id: 1, title: 'Post 1', author: 'John Doe' },
     { id: 2, title: 'Post 2', author: 'Juan Doe' },
@@ -9,6 +10,7 @@ const posts = ref([
 ])
 const selected = ref([])
 const search = ref('')
+const postForm = ref();
 </script>
 <template>
     <div>
@@ -26,14 +28,19 @@ const search = ref('')
                     <template v-slot:default="{ isActive }">
                         <v-card :title="item.title">
                             <v-card-text>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
+                                <PostForm ref="postForm" :post="item"/>
                             </v-card-text>
 
                             <v-card-actions>
                                 <v-spacer></v-spacer>
 
-                                <v-btn text="Close Dialog" @click="isActive.value = false"></v-btn>
+                                <v-btn text="Cancel" @click="isActive.value = false"></v-btn>
+                                <v-btn color="primary"
+                                variant="flat"
+                                text="Save Post"
+                                @click="
+                                postForm.submit();
+                                isActive.value = false"></v-btn>
                             </v-card-actions>
                         </v-card>
                     </template>
