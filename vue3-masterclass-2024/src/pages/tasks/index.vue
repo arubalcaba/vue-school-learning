@@ -4,6 +4,8 @@ import type { Tables } from '../../../database/types'
 import type { ColumnDef } from '@tanstack/vue-table';
 import { RouterLink } from 'vue-router';
 
+usePageStore().pageData.title ='My Task';
+
 const tasks = ref<Tables<'tasks'>[] | null>(null)
 
 const getTasks = async() => {
@@ -15,9 +17,7 @@ const getTasks = async() => {
 
 }
 
-;(async() => {
-  await getTasks()
-})()
+await getTasks()
 
 
 const columns: ColumnDef<Tables<'tasks'>>[] = [
